@@ -1,0 +1,101 @@
+import unittest
+import importlib
+
+class TestAssignmentTwo(unittest.TestCase):
+    def test_01_is_triangle(self):
+        self.assertEqual(asgmt.is_triangle(3, 4, 5), 'Yes')
+        self.assertEqual(asgmt.is_triangle(7, 24, 25), 'Yes')
+        self.assertEqual(asgmt.is_triangle(3, 3, 3), 'Yes')
+        self.assertEqual(asgmt.is_triangle(1, 2, 5), 'No')
+        self.assertEqual(asgmt.is_triangle(5, 12, 13), 'Yes')
+    def test_02_is_right_triangle(self):
+        self.assertEqual(asgmt.is_right_triangle(3, 4, 5), 'Yes')
+        self.assertEqual(asgmt.is_right_triangle(7, 24, 25), 'Yes')
+        self.assertEqual(asgmt.is_right_triangle(3, 3, 3), 'No')
+        self.assertEqual(asgmt.is_right_triangle(1, 2, 5), 'No')
+        self.assertEqual(asgmt.is_right_triangle(5, 12, 13), 'Yes')
+    def test_03_is_upper_or_lower_cased(self):
+        self.assertEqual(asgmt.is_upper_or_lower_cased("a"), 'Lower-cased')
+        self.assertEqual(asgmt.is_upper_or_lower_cased("z"), 'Lower-cased')
+        self.assertEqual(asgmt.is_upper_or_lower_cased("e"), 'Lower-cased')
+        self.assertEqual(asgmt.is_upper_or_lower_cased("b"), 'Lower-cased')
+        self.assertEqual(asgmt.is_upper_or_lower_cased("y"), 'Lower-cased')
+        self.assertEqual(asgmt.is_upper_or_lower_cased("A"), 'Upper-cased')
+        self.assertEqual(asgmt.is_upper_or_lower_cased("Z"), 'Upper-cased')
+        self.assertEqual(asgmt.is_upper_or_lower_cased("E"), 'Upper-cased')
+        self.assertEqual(asgmt.is_upper_or_lower_cased("B"), 'Upper-cased')
+        self.assertEqual(asgmt.is_upper_or_lower_cased("Y"), 'Upper-cased')
+    def test_04_reverse_vowel(self):
+        self.assertEqual(asgmt.reverse_vowel("a"), 'A')
+        self.assertEqual(asgmt.reverse_vowel("A"), 'a')
+        self.assertEqual(asgmt.reverse_vowel("z"), 'z')
+        self.assertEqual(asgmt.reverse_vowel("Z"), 'Z')
+        self.assertEqual(asgmt.reverse_vowel("e"), 'E')
+        self.assertEqual(asgmt.reverse_vowel("E"), 'e')
+        self.assertEqual(asgmt.reverse_vowel("b"), 'b')
+        self.assertEqual(asgmt.reverse_vowel("B"), 'B')
+        self.assertEqual(asgmt.reverse_vowel("i"), 'I')
+        self.assertEqual(asgmt.reverse_vowel("I"), 'i')
+    def test_05_get_alphabet_with_order(self):
+        self.assertEqual(asgmt.get_alphabet_with_order(1, False), 'a')
+        self.assertEqual(asgmt.get_alphabet_with_order(1, True), 'A')
+        self.assertEqual(asgmt.get_alphabet_with_order(2, False), 'b')
+        self.assertEqual(asgmt.get_alphabet_with_order(2, True), 'B')
+        self.assertEqual(asgmt.get_alphabet_with_order(3, False), 'c')
+        self.assertEqual(asgmt.get_alphabet_with_order(3, True), 'C')
+        self.assertEqual(asgmt.get_alphabet_with_order(24, False), 'x')
+        self.assertEqual(asgmt.get_alphabet_with_order(24, True), 'X')
+        self.assertEqual(asgmt.get_alphabet_with_order(25, False), 'y')
+        self.assertEqual(asgmt.get_alphabet_with_order(25, True), 'Y')
+        self.assertEqual(asgmt.get_alphabet_with_order(26, False), 'z')
+        self.assertEqual(asgmt.get_alphabet_with_order(26, True), 'Z')
+    def test_06_categorize_nikes_running_shoes(self):
+        self.assertEqual(asgmt.categorize_nikes_running_shoes(False, False, False), 'Pegasus')
+        self.assertEqual(asgmt.categorize_nikes_running_shoes(False, False, True), 'Tempo')
+        self.assertEqual(asgmt.categorize_nikes_running_shoes(True, False, False), 'Turbo')
+        self.assertEqual(asgmt.categorize_nikes_running_shoes(True, True, False), 'Vaporfly')
+        self.assertEqual(asgmt.categorize_nikes_running_shoes(True, True, True), 'Alphafly')
+    def test_07_use_lists_pop_method(self):
+        input_list = [2, 3, 5, 7]
+        answer = asgmt.use_lists_pop_method(input_list)
+        self.assertEqual(answer["last_element"], 7)
+        self.assertEqual(answer["remaining_list"],[2, 3, 5] )
+        input_list = [2, 3, 5]
+        answer = asgmt.use_lists_pop_method(input_list)
+        self.assertEqual(answer["last_element"], 5)
+        self.assertEqual(answer["remaining_list"],[2, 3] )
+        input_list = [2, 3]
+        answer = asgmt.use_lists_pop_method(input_list)
+        self.assertEqual(answer["last_element"], 3)
+        self.assertEqual(answer["remaining_list"],[2] )
+    def test_08_retrieve_middle_elements(self):
+        self.assertEqual(asgmt.retrieve_middle_elements([2, 3, 5]), 3)
+        self.assertEqual(asgmt.retrieve_middle_elements([2, 3, 5, 7]), (3, 5))
+        self.assertEqual(asgmt.retrieve_middle_elements([2, 3, 5, 7, 11]), 5)
+        self.assertEqual(asgmt.retrieve_middle_elements([2, 3, 5, 7, 11, 13]), (5, 7))
+        self.assertEqual(asgmt.retrieve_middle_elements([2, 3, 5, 7, 11, 13, 17]), 7)
+        self.assertEqual(asgmt.retrieve_middle_elements([2, 3, 5, 7, 11, 13, 17, 19]), (7, 11))
+    def test_09_median(self):
+        self.assertEqual(asgmt.median([2, 3, 5]), 3)
+        self.assertEqual(asgmt.median([2, 3, 5, 7, 11]), 5)
+        self.assertEqual(asgmt.median([2, 3, 5, 7, 11, 13]), 6.0)
+        self.assertEqual(asgmt.median([11, 13, 17, 2, 3, 5, 7]), 7)
+        self.assertEqual(asgmt.median([7, 11, 13, 17, 19, 2, 3, 5]), 9.0)
+    def test_10_sing_do_re_mi(self):
+        self.assertEqual(asgmt.sing_do_re_mi("Do"), 'a deer, a female deer.')
+        self.assertEqual(asgmt.sing_do_re_mi("Re"), 'a drop of golden sun.')
+        self.assertEqual(asgmt.sing_do_re_mi("Mi"), 'a name I call myself.')
+        self.assertEqual(asgmt.sing_do_re_mi("Fa"), 'a long long way to run.')
+        self.assertEqual(asgmt.sing_do_re_mi("So"), 'a needle pulling thread.')
+        self.assertEqual(asgmt.sing_do_re_mi("La"), 'a note to follow so.')
+        self.assertEqual(asgmt.sing_do_re_mi("Ti"), 'a drink with jam and bread.')
+
+asgmt = importlib.import_module("asgmt-two")
+suite = unittest.TestLoader().loadTestsFromTestCase(TestAssignmentTwo)
+runner = unittest.TextTestRunner(verbosity=2)
+test_results = runner.run(suite)
+number_of_failures = len(test_results.failures)
+number_of_errors = len(test_results.errors)
+number_of_test_runs = test_results.testsRun
+number_of_successes = number_of_test_runs - (number_of_failures + number_of_errors)
+print("You've got {} successes among {} questions.".format(number_of_successes, number_of_test_runs))
